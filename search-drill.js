@@ -1,4 +1,7 @@
 const BinarySearchTree = require('./BinarySearchTree')
+const Queue = require('./Queue')
+
+
 const arr = [3, 5, 6, 8, 11, 12, 14, 15, 17, 18]
 
 const binarySearch = (array, value, start=0, end=array.length) => {
@@ -92,6 +95,110 @@ array.forEach(element => {
     BST.insert(element)
 });
 
+/*
 console.log(BST.inOrder());
 console.log(BST.preOrder());
 console.log(BST.postOrder());
+*/
+
+const BSTOfficers = new BinarySearchTree('Captain Picard','Captain Picard');
+/*
+const oficcers = [
+  'Captain Picard',
+  'Commander Riker',
+  'Lt. Cmdr. Worf',
+  'Lt. Cmdr. LaForge',
+  'Lieutenant security-officer',
+  'Commander Data',
+  'Lt. Cmdr. Crusher',
+  'Lieutenant Selar'
+]
+*/
+
+BSTOfficers.left = new BinarySearchTree('Commander Riker', 'Commander Riker');
+BSTOfficers.left.left = new BinarySearchTree('Lt. Cmdr. Worf', 'Lt. Cmdr. Worf');
+BSTOfficers.left.right = new BinarySearchTree('Lt. Cmdr. LaForge', 'Lt. Cmdr. LaForge');
+BSTOfficers.left.left.left = new BinarySearchTree('Lieutenant security-officer', 'Lieutenant security-officer');
+
+BSTOfficers.right = new BinarySearchTree('Commander Data', 'Commander Data');
+BSTOfficers.right.right = new BinarySearchTree('Lt. Cmdr. Crusher', 'Lt. Cmdr. Crusher');
+BSTOfficers.right.right.left = new BinarySearchTree('Lieutenant Selar', 'Lieutenant Selar');
+
+
+
+
+let queueCommander = new Queue();
+function nextCommander(rootNode) {
+  if (rootNode === null) {
+    return;
+  }
+  let queue = new Queue();
+  queue.enqueue(rootNode);
+  let officers = [];
+
+  let currentNode = true
+  while (currentNode) {
+    currentNode = queue.dequeue();
+    if (currentNode){
+      officers.push(currentNode.value)
+      //console.log(currentNode.value);
+      if (currentNode.left !== null) {
+        queue.enqueue(currentNode.left)
+      }
+      if (currentNode.right !== null) {
+        queue.enqueue(currentNode.right)
+      }
+    }
+  }
+  for (let i=1; i<officers.length; i++){
+    console.log(`Officer ${officers[officers.length-i]} should be reemplaced by ${officers[officers.length-i-1]}`);
+  }
+  // Continue looping through the queue until it's empty!
+}
+
+nextCommander(BSTOfficers);
+
+/*const display = (list) => {
+  let node
+  if(list.top)
+    node = list.top
+  if(list.first)
+    node = list.first
+  while (node !== null){
+    console.log(node.value)
+    node = node.next
+  }
+}*/
+
+/*
+const BFS = (node) => {
+   // Create a Queue and add our initial node in it
+   let q = new Queue();
+   let explored = new Set();
+   q.enqueue(node);
+
+   // Mark the first node as explored explored.
+   add(node);
+
+   // We'll continue till our queue gets empty
+   while (!q.isEmpty()) {
+      let t = q.dequeue();
+
+      // Log every element that comes out of the Queue
+      console.log(t);
+
+      // 1. In the edges object, we search for nodes this node is directly connected to.
+      // 2. We filter out the nodes that have already been explored.
+      // 3. Then we mark each unexplored node as explored and add it to the queue.
+      this.edges[t]
+      .filter(n => !explored.has(n))
+      .forEach(n => {
+         explored.add(n);
+         q.enqueue(n);
+      });
+   }
+}*/
+
+//display(queueCommander);
+
+//console.log(BSTOfficers);
