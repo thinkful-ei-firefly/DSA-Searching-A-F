@@ -1,3 +1,4 @@
+const BinarySearchTree = require('./BinarySearchTree')
 const arr = [3, 5, 6, 8, 11, 12, 14, 15, 17, 18]
 
 const binarySearch = (array, value, start=0, end=array.length) => {
@@ -75,3 +76,22 @@ const binarySearchBook = (array, value, start=0, end=array.length) => {
 console.log(binarySearchBook(books, {code:'517.37', title:'Metric differential geometries 1'}));
 console.log(binarySearchBook(books, {code:'518.37', title:'Metric differential geometries 1'}));
 */
+
+// 4.1) Given a binary search tree whose in-order and pre-order traversals are respectively 14 15 19 25 27 35 79 89 90 91 and 35 25 15 14 19 27 89 79 91 90. What would be its postorder traversal?
+
+// answer would be => 14, 19, 15, 27,25,79, 90, 91, 89,35;
+
+//4.2) The post order traversal of a binary search tree is 5 7 6 9 11 10 8. What is its pre-order traversal?
+
+// Pre-order traversal would be => 8,6,5,7,10,9,11
+
+
+const BST = new BinarySearchTree();
+const array = [25, 15, 50, 10, 24, 35, 70, 4, 12, 18, 31, 44, 66, 90, 22]
+array.forEach(element => {
+    BST.insert(element)
+});
+
+console.log(BST.inOrder());
+console.log(BST.preOrder());
+console.log(BST.postOrder());
