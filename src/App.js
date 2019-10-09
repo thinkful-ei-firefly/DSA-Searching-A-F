@@ -27,7 +27,7 @@ class App extends React.Component {
     let searches = 0;
     for (let i =0; i< data.length; i++) {
       searches ++;
-      console.log(data[i], num);
+      //console.log(data[i], num);
       if (data[i] === num){
         this.setState({
           searches: searches,
